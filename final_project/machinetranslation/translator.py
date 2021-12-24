@@ -16,12 +16,16 @@ language_translator = LanguageTranslatorV3(
 
 language_translator.set_service_url(url)
 
-def english_to_french(english_text):
-    #write the code here
-    french_text = language_translator.translate(text = english_text, model_id = 'en-fr').get_result()
-    return french_text
+def english_to_french(request):
+    if request is None:
+        return None
+    response = language_translator.translate(text=request, model_id="en-fr").get_result()
+    translation = response['translations'][0]['translation']
+    return translation 
 
-def french_to_english(french_text):
-    #write the code here
-    english_text = language_translator.translate(text = french_text, model_id = 'fr-en').get_result()
-    return english_text
+def french_to_english(request):
+    if request is None:
+        return None
+    response = language_translator.translate(text=request, model_id="fr-en").get_result()
+    translation = response['translations'][0]['translation']
+    return translation 
